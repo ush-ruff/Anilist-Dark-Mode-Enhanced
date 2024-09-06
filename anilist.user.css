@@ -1,0 +1,248 @@
+/* ==UserStyle==
+@name           Anilist - Dark Mode Enhanced
+@namespace      github.com/ush-ruff
+@homepageURL    https://github.com/ush-ruff/Anilist-Dark-Mode-Enhanced
+@updateURL      https://github.com/ush-ruff/Anilist-Dark-Mode-Enhanced/raw/main/anilist.user.css
+@version        0.1.0
+@description    Fixes for unstyled elements and custom anime/mangalist
+@author         ushruff
+==/UserStyle== */
+
+@-moz-document domain("anilist.co") {
+  :root {
+    scrollbar-color: rgb(0, 89, 135) rgb(21, 31, 46);
+    scrollbar-width: thin;
+  }
+
+  /* Fix White Flash */
+  html {
+    background: rgb(39, 44, 56);
+  }
+
+  .site-theme-dark {
+    /* Nav */
+    .nav-unscoped.transparent:hover {
+      background: rgba(35, 38, 67, .5);
+    }
+
+    /* Dropdowns */
+    .el-select-dropdown {
+      background-color: rgb(var(--color-gray-300));
+    }
+
+    .el-select-dropdown__item.hover,
+    .el-select-dropdown__item:hover {
+      background: rgb(var(--color-blue));
+      color: rgb(var(--color-text-bright));
+    }
+
+    .el-popper[x-placement^="bottom"] .popper__arrow,
+    .el-popper[x-placement^="bottom"] .popper__arrow::after {
+      border-bottom-color: rgb(var(--color-gray-300));
+    }
+
+    .el-popper[x-placement^="top"] .popper__arrow,
+    .el-popper[x-placement^="top"] .popper__arrow::after {
+      border-top-color: rgb(var(--color-gray-300));
+    }
+
+    .el-dropdown-menu,
+    .el-dropdown-menu__item--divided::before {
+      background-color: rgb(var(--color-gray-300));
+    }
+
+    .el-dropdown-menu__item--divided {
+      border-top-color: rgb(var(--color-gray-100));
+    }
+
+    /* Date Picker */
+    .el-picker-panel {
+      background-color: rgb(var(--color-gray-400));
+      border-color: rgb(var(--color-gray-100));
+      color: rgb(var(--color-text-bright));
+    }
+
+    .el-date-picker__header-label,
+    .el-picker-panel__icon-btn,
+    .el-date-table th {
+      color: rgb(var(--color-text-bright));
+    }
+
+    .el-date-table td.next-month,
+    .el-date-table td.prev-month {
+      color: rgb(var(--color-text-lighter));
+    }
+  }
+}
+
+@-moz-document regexp("^https:\\/\\/anilist\\.co\\/user\\/.+\\/(animelist|mangalist)") {
+  /* --- List --- */
+  #app {
+    .user-page-unscoped .content.container:has(.medialist.cards) {
+      max-width: unset;
+      position: relative;
+      padding-inline: unset;
+      background-image: url(https://i.imgur.com/PHyLMQa.jpg);
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgb(var(--color-gray-200), 0.6);
+      }
+    }
+
+    .user-page-unscoped .medialist.cards {
+      max-width: 1800px;
+      margin: 0 auto;
+      padding-block-start: 40px;
+      padding-inline: 20px;
+    }
+    
+    .wrap, .footer {
+      margin: unset;
+    }
+  }
+  
+  /* --- Minimize navigation pane and fix layout --- */
+  .medialist.cards {
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: 50px auto;
+    
+    .lists {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: 50px auto;
+    }
+    
+    .actions {
+      grid-column: 2;
+      grid-row: 1;
+      position: relative;
+      top: 0;
+      justify-self: end;
+    }
+    
+    .list-wrap {
+      grid-column: 1 / -1;
+    }
+    
+    .section-name {
+      font-family: Overpass;
+      font-weight: bold;
+      padding: 1rem;
+      border-bottom: 2px solid rgb(var(--color-gray-400), 0.75);
+      border-image:  linear-gradient(to right, rgb(var(--color-blue)), rgb(var(--color-gray-400), 0.5)) 1;
+      pointer-events: none;
+    }
+    
+    .filters-wrap {
+      grid-row: 1 / -1;
+      grid-column: 1 / 2;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+      gap: 10px;
+    }
+    
+    .filter-mobile-wrap {
+      align-self: center;
+      display: grid;
+      grid-column-gap: 15px;
+      grid-template-columns: auto 40px;
+      z-index: 20;
+    }
+    
+    .filter-toggle {
+      display: initial;
+      grid-column: 2;
+    }
+    
+    .filters.mobile-nav-hidden {
+      display: none;
+    }
+    
+    .filters:not(.mobile-nav-hidden) {
+      align-self: start;
+      margin: unset;
+      padding-block: 0 15px;
+      padding-inline: 10px;
+      border-radius: 5px;
+      background: rgb(var(--color-gray-200));
+      z-index: 20;
+    }
+    
+    .filter-group {
+      margin-top: 15px;
+    }
+    
+    .filter-group .el-select {
+      width: 100%
+    }
+    
+    .filters .el-input__inner::placeholder {
+      color: rgb(var(--color-gray-900));
+    }
+    
+    .filter-group .active {
+      background-color: rgba(var(--color-blue), .8);
+      color: rgb(var(--color-background-900));
+    }
+
+    .filter-group .count {
+      opacity: 1;
+    }
+
+    .filters .el-slider {
+      padding-left: 5px;
+    }
+
+    .filters .el-slider__button {
+      background-color: rgb(var(--color-background-300));
+    }
+  }
+  
+  /* --- Cards Grid --- */
+  .medialist.cards .list-section .list-entries {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-rows: auto;
+    gap: 3rem;
+    
+    .entry-card {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 18 / 24;
+      border-radius: 0.5rem;
+      transition: scale 250ms ease-in-out;
+      overflow: hidden;
+      
+      &:hover {
+        scale: 1.075;
+      }
+    }
+    
+    .image {
+      background-position: top center;
+    }
+    
+    .release-status {
+      width: 100%;
+      height: 3px;
+      inset: auto 0 0 0;
+      border-radius: unset;
+      z-index: 3;
+    }
+  }
+  
+  /* --- Table Layout --- */
+  .medialist.table .list-section .list-entries {
+    .entry:nth-child(2n + 1):not(:hover) {
+      background-color: rgb(var(--color-background-300));
+    }
+  }
+}
