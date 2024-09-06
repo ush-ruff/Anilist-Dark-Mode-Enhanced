@@ -3,7 +3,7 @@
 @namespace      github.com/ush-ruff
 @homepageURL    https://github.com/ush-ruff/Anilist-Dark-Mode-Enhanced
 @updateURL      https://github.com/ush-ruff/Anilist-Dark-Mode-Enhanced/raw/main/anilist.user.css
-@version        0.1.0
+@version        0.1.1
 @description    Fixes for unstyled elements and custom anime/mangalist
 @author         ushruff
 ==/UserStyle== */
@@ -75,7 +75,7 @@
   }
 }
 
-@-moz-document regexp("^https:\\/\\/anilist\\.co\\/user\\/.+\\/(animelist|mangalist)") {
+@-moz-document regexp("^https:\\/\\/anilist\\.co\\/user\\/.+\\/(animelist|mangalist)\\/?") {
   /* --- List --- */
   #app {
     .user-page-unscoped .content.container:has(.medialist.cards) {
